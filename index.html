@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium portfolio website for a strategic copywriter and digital creator." />
+  <title>Strategic Copywriter Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="progress-wrap" aria-hidden="true">
+    <div id="scroll-progress" class="progress-bar"></div>
+  </div>
+
+  <header class="site-header" id="top">
+    <div class="container nav-shell">
+      <a class="brand" href="#top">Ari Vale</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#autopsy">Autopsy</a>
+        <a href="#copy-test">Copy Test</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section">
+      <div class="container reveal">
+        <p class="eyebrow">Strategic Copywriter • Digital Creator</p>
+        <h1>Authenticity is your greatest competitive advantage.</h1>
+        <p class="lead">I help brands clarify their message and turn attention into action.</p>
+        <a class="button" href="#services">View Services</a>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container reveal">
+        <h2>Services</h2>
+        <div class="grid cards-grid">
+          <article class="card hover-card">
+            <h3>Website Copy</h3>
+            <p>Strategic messaging architecture that turns your pages into a guided journey from curiosity to conversion.</p>
+          </article>
+          <article class="card hover-card">
+            <h3>Landing Page Strategy</h3>
+            <p>Conversion-focused landing pages designed to align intent, reduce friction, and accelerate decision-making.</p>
+          </article>
+          <article class="card hover-card">
+            <h3>Brand Voice Development</h3>
+            <p>A voice system that keeps your messaging unmistakably you across campaigns, channels, and customer moments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="autopsy">
+      <div class="container reveal">
+        <h2>Copywriting Autopsy</h2>
+        <div class="autopsy-layout">
+          <div class="autopsy-block">
+            <p class="label">Before</p>
+            <blockquote>“We provide innovative digital solutions for modern businesses.”</blockquote>
+          </div>
+          <div class="autopsy-block">
+            <p class="label">After</p>
+            <blockquote>“Turn your website into your best salesperson.”</blockquote>
+          </div>
+        </div>
+        <p class="autopsy-note">The second headline converts better because it is specific, benefit-driven, and emotionally concrete. Instead of vague corporate language, it paints a clear outcome readers can immediately value.</p>
+      </div>
+    </section>
+
+    <section class="section" id="copy-test">
+      <div class="container reveal">
+        <h2>Interactive Copy Test</h2>
+        <p class="section-intro">Choose the CTA that you believe will convert better:</p>
+        <div class="copy-test-grid">
+          <button class="option-card" data-option="A" aria-controls="copy-test-result">A: Start Your Free Trial</button>
+          <button class="option-card" data-option="B" aria-controls="copy-test-result">B: Try It Free. No Card. No Commitment.</button>
+        </div>
+        <div id="copy-test-result" class="result-card" role="status" aria-live="polite">
+          Select an option to reveal the conversion insight.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="container reveal">
+        <h2>Testimonials</h2>
+        <div class="grid testimonials-grid">
+          <article class="card testimonial-card">
+            <p>“Our conversion rate jumped 38% in eight weeks. The messaging finally sounds like us, but sharper.”</p>
+            <span>— Head of Growth, SaaS Brand</span>
+          </article>
+          <article class="card testimonial-card">
+            <p>“Every page now has a purpose. Visitors stay longer, click further, and inquiries are far more qualified.”</p>
+            <span>— Founder, Creative Studio</span>
+          </article>
+          <article class="card testimonial-card">
+            <p>“A rare blend of strategy and craft. The copy didn’t just read better; it performed better.”</p>
+            <span>— Marketing Director, DTC Company</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta" id="contact">
+      <div class="container reveal">
+        <h2>Ready to improve your messaging?</h2>
+        <a class="button" href="mailto:hello@arivale.com">Start a Project</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

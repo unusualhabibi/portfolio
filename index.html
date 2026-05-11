@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullah Ishaq — Legal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --off-white: #f5f5f7;
+  --surface: #fbfbfd;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
+  --text: #1d1d1f;
+  --text-2: #424245;
+  --text-3: #6e6e73;
+  --text-4: #86868b;
+  --ip:     hsl(250, 60%, 50%);
+  --ip-bg:  hsl(250, 60%, 97%);
+  --dp:     hsl(200, 75%, 42%);
+  --dp-bg:  hsl(200, 75%, 97%);
+  --adr:    hsl(155, 65%, 38%);
+  --adr-bg: hsl(155, 65%, 97%);
+  --en:     hsl(35,  85%, 45%);
+  --en-bg:  hsl(35,  85%, 97%);
+  --ai:     hsl(220, 80%, 50%);
+  --ai-bg:  hsl(220, 80%, 97%);
+  --radius: 18px;
+  --radius-lg: 28px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+body { font-family:'Instrument Sans',sans-serif; background:var(--white); color:var(--text); line-height:1.5; overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:900; height:52px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; padding:0 28px;
+  transition:background 0.3s;
+}
+.nav-wordmark { font-family:'Instrument Serif',serif; font-size:1rem; color:var(--text); text-decoration:none; letter-spacing:-0.01em; }
+.nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+.nav-links a { font-size:0.8rem; color:var(--text-3); text-decoration:none; letter-spacing:0.01em; transition:color 0.2s; }
+.nav-links a:hover { color:var(--text); }
+.nav-cta { color:var(--white) !important; background:var(--text); padding:6px 14px; border-radius:100px; font-weight:500 !important; transition:opacity 0.2s !important; }
+.nav-cta:hover { opacity:0.78; }
+.nav-ham { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+.nav-ham span { display:block; width:22px; height:1.5px; background:var(--text); border-radius:2px; transition:all 0.3s; }
+.mobile-menu { display:none; position:fixed; top:52px; left:0; right:0; bottom:0; z-index:899; background:rgba(255,255,255,0.97); backdrop-filter:blur(20px); padding:40px 28px; flex-direction:column; gap:0; overflow-y:auto; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-size:1.2rem; color:var(--text); text-decoration:none; padding:16px 0; border-bottom:1px solid var(--border); display:block; }
+
+/* HERO */
+#hero { min-height:100svh; display:flex; align-items:center; justify-content:center; text-align:center; padding:120px 24px 80px; position:relative; overflow:hidden; }
+#hero::before { content:''; position:absolute; width:800px; height:800px; border-radius:50%; background:radial-gradient(ellipse, rgba(0,0,0,0.025) 0%, transparent 65%); top:50%; left:50%; transform:translate(-50%,-55%); pointer-events:none; }
+.hero-eyebrow { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-4); margin-bottom:28px; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.1s forwards; }
+.hero-name { font-family:'Instrument Serif',serif; font-size:clamp(3.8rem,10vw,9rem); font-weight:400; line-height:1.0; letter-spacing:-0.035em; color:var(--text); margin-bottom:20px; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.25s forwards; }
+.hero-name em { font-style:italic; color:var(--text-3); }
+.hero-desc { font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:var(--text-3); max-width:480px; margin:0 auto 48px; line-height:1.7; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.4s forwards; }
+.hero-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; opacity:0; animation:fadeUp 0.9s var(--ease-out) 0.55s forwards; }
+.hero-scroll { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeUp 1s var(--ease-out) 1.2s forwards; }
+.hero-scroll span { font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-4); }
+.scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--text-4),transparent); animation:pulse 2.2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:0.25} 50%{opacity:1} }
+.btn { display:inline-flex; align-items:center; gap:8px; font-family:'Instrument Sans',sans-serif; font-size:0.9rem; font-weight:500; padding:13px 26px; border-radius:100px; text-decoration:none; border:none; cursor:pointer; transition:all 0.25s var(--ease-out); letter-spacing:-0.01em; }
+.btn-dark { background:var(--text); color:var(--white); }
+.btn-dark:hover { background:#3a3a3d; transform:scale(1.02); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border-strong); }
+.btn-ghost:hover { background:var(--off-white); transform:scale(1.02); }
+.btn-light { background:var(--white); color:var(--text); }
+.btn-light:hover { background:var(--off-white); transform:scale(1.02); }
+
+/* DOMAINS BENTO */
+#domains { padding:80px 24px 100px; background:var(--off-white); }
+.sec-label { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-4); margin-bottom:14px; }
+.sec-headline { font-family:'Instrument Serif',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:400; letter-spacing:-0.025em; line-height:1.1; color:var(--text); margin-bottom:14px; }
+.sec-headline em { font-style:italic; }
+.sec-sub { font-size:1rem; font-weight:300; color:var(--text-3); line-height:1.7; margin-bottom:0; }
+.domains-intro { max-width:600px; margin:0 auto 64px; text-align:center; }
+.bento { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
+.bento-card { background:var(--white); border-radius:var(--radius-lg); padding:36px; cursor:pointer; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; min-height:260px; position:relative; overflow:hidden; border:1px solid var(--border); transition:transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.3s; will-change:transform; }
+.bento-card:hover { transform:translateY(-5px) scale(1.006); box-shadow:0 28px 64px rgba(0,0,0,0.11); border-color:transparent; }
+.bento-card:nth-child(1){grid-column:span 7;}
+.bento-card:nth-child(2){grid-column:span 5;}
+.bento-card:nth-child(3){grid-column:span 4;}
+.bento-card:nth-child(4){grid-column:span 5;min-height:300px;}
+.bento-card:nth-child(5){grid-column:span 3;}
+.bento-card::after { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle, var(--card-color) 0%, transparent 70%); opacity:0.07; pointer-events:none; transition:opacity 0.4s, transform 0.4s var(--ease-out); }
+.bento-card:hover::after { opacity:0.15; transform:scale(1.4); }
+[data-domain="ip"]     { --card-color:var(--ip);  }
+[data-domain="dp"]     { --card-color:var(--dp);  }
+[data-domain="adr"]    { --card-color:var(--adr); }
+[data-domain="energy"] { --card-color:var(--en);  }
+[data-domain="ai"]     { --card-color:var(--ai);  }
+.bento-icon { width:48px; height:48px; border-radius:14px; background:rgba(0,0,0,0.04); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:auto; }
+.bento-body { margin-top:32px; }
+.bento-tag { display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--card-color); padding:4px 10px; border-radius:100px; background:rgba(0,0,0,0.04); margin-bottom:12px; }
+.bento-title { font-family:'Instrument Serif',serif; font-size:1.4rem; font-weight:400; letter-spacing:-0.02em; color:var(--text); line-height:1.2; margin-bottom:8px; }
+.bento-desc { font-size:0.83rem; font-weight:300; color:var(--text-3); line-height:1.6; margin-bottom:18px; }
+.bento-chips { display:flex; flex-wrap:wrap; gap:6px; }
+.bento-chip { font-size:0.7rem; padding:4px 10px; border-radius:100px; border:1px solid var(--border-strong); color:var(--text-3); font-family:'JetBrains Mono',monospace; }
+.bento-arrow { position:absolute; bottom:28px; right:28px; width:36px; height:36px; border-radius:50%; background:var(--card-color); display:flex; align-items:center; justify-content:center; color:white; font-size:0.85rem; opacity:0; transform:translateY(6px) scale(0.85); transition:opacity 0.3s, transform 0.35s var(--ease-spring); }
+.bento-card:hover .bento-arrow { opacity:1; transform:translateY(0) scale(1); }
+
+/* DOMAIN SECTIONS */
+.domain-section { padding:100px 24px; border-top:1px solid var(--border); }
+.domain-section:nth-child(even) { background:var(--surface); }
+.ds-wrap { max-width:1100px; margin:0 auto; }
+.ds-head { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-bottom:80px; }
+.ds-accent { display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--domain-color,var(--text-4)); margin-bottom:20px; }
+.ds-accent::before { content:''; display:block; width:24px; height:2px; background:currentColor; border-radius:1px; }
+.ds-title { font-family:'Instrument Serif',serif; font-size:clamp(2rem,4.5vw,3.8rem); font-weight:400; line-height:1.05; letter-spacing:-0.03em; color:var(--text); margin-bottom:20px; }
+.ds-title em { font-style:italic; color:var(--domain-color,var(--text-3)); }
+.ds-intro { font-size:0.97rem; font-weight:300; color:var(--text-3); line-height:1.8; }
+.ds-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; }
+.ds-stat { background:var(--white); padding:28px; }
+.ds-stat-n { font-family:'Instrument Serif',serif; font-size:2.8rem; font-weight:400; letter-spacing:-0.04em; color:var(--text); line-height:1; display:block; }
+.ds-stat-l { font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-4); display:block; margin-top:4px; }
+.ds-block { margin-bottom:64px; }
+.ds-bh { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+.ds-bh-title { font-family:'Instrument Serif',serif; font-size:1.45rem; font-weight:400; letter-spacing:-0.02em; }
+.ds-bh-link { font-family:'JetBrains Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--domain-color,var(--text-3)); text-decoration:none; transition:opacity 0.2s; }
+.ds-bh-link:hover { opacity:0.65; }
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+/* ESSAY CARD */
+.ec { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:28px; display:flex; flex-direction:column; gap:10px; transition:all 0.3s var(--ease-out); cursor:pointer; text-decoration:none; }
+.ec:hover { border-color:transparent; box-shadow:0 14px 40px rgba(0,0,0,0.1); transform:translateY(-2px); }
+.ec-type { font-family:'JetBrains Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--domain-color,var(--text-3)); }
+.ec-title { font-family:'Instrument Serif',serif; font-size:1.08rem; font-weight:400; letter-spacing:-0.015em; color:var(--text); line-height:1.35; }
+.ec-exc { font-size:0.82rem; font-weight:300; color:var(--text-3); line-height:1.65; flex:1; }
+.ec-foot { display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--text-4); }
+
+/* TIMELINE */
+.tl-wrap { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:32px; }
+.tl-item { display:grid; grid-template-columns:100px 1fr; gap:20px; padding:18px 0; border-bottom:1px solid var(--border); }
+.tl-item:last-child { border-bottom:none; padding-bottom:0; }
+.tl-item:first-child { padding-top:0; }
+.tl-date { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--text-4); text-transform:uppercase; letter-spacing:0.06em; padding-top:2px; line-height:1.6; }
+.tl-t { font-size:0.9rem; font-weight:500; color:var(--text); margin-bottom:4px; }
+.tl-d { font-size:0.82rem; font-weight:300; color:var(--text-3); line-height:1.6; }
+.tl-badge { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.62rem; padding:2px 8px; border-radius:100px; background:var(--domain-bg,var(--off-white)); color:var(--domain-color,var(--text-3)); margin-top:6px; }
+
+/* PROJECT CARD */
+.pc { border-radius:var(--radius); padding:32px; display:flex; flex-direction:column; gap:14px; position:relative; overflow:hidden; min-height:210px; transition:transform 0.35s var(--ease-out), box-shadow 0.35s; }
+.pc:hover { transform:translateY(-3px); box-shadow:0 22px 52px rgba(0,0,0,0.2); }
+.pc-dark { background:var(--text); color:var(--white); }
+.pc-tint { background:var(--domain-color,var(--text)); color:var(--white); }
+.pc::before { content:''; position:absolute; top:-80px; right:-80px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.05); pointer-events:none; }
+.pc-type { font-family:'JetBrains Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; opacity:0.42; }
+.pc-title { font-family:'Instrument Serif',serif; font-size:1.2rem; font-weight:400; letter-spacing:-0.02em; line-height:1.25; flex:1; }
+.pc-desc { font-size:0.8rem; font-weight:300; opacity:0.58; line-height:1.6; }
+.pc-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.pc-tag { font-family:'JetBrains Mono',monospace; font-size:0.63rem; padding:3px 9px; border-radius:100px; border:1px solid rgba(255,255,255,0.18); color:rgba(255,255,255,0.68); }
+
+/* FEED */
+.feed { display:flex; flex-direction:column; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; }
+.fi { background:var(--white); padding:20px 24px; display:flex; gap:14px; align-items:flex-start; transition:background 0.2s; }
+.fi:hover { background:var(--off-white); }
+.fi-dot { width:7px; height:7px; border-radius:50%; background:var(--domain-color,var(--text-4)); margin-top:6px; flex-shrink:0; }
+.fi-body { flex:1; }
+.fi-t { font-size:0.87rem; font-weight:500; color:var(--text); margin-bottom:3px; }
+.fi-d { font-size:0.79rem; font-weight:300; color:var(--text-3); line-height:1.55; }
+.fi-date { font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--text-4); white-space:nowrap; margin-top:2px; }
+
+/* READING LIST */
+.rl { display:flex; flex-direction:column; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; }
+.ri { background:var(--white); padding:18px 24px; display:flex; align-items:center; gap:18px; transition:background 0.2s; }
+.ri:hover { background:var(--off-white); }
+.ri-n { font-family:'Instrument Serif',serif; font-size:1.3rem; color:var(--border-strong); width:28px; flex-shrink:0; font-style:italic; }
+.ri-info { flex:1; }
+.ri-t { font-size:0.87rem; font-weight:500; color:var(--text); margin-bottom:2px; }
+.ri-s { font-size:0.77rem; font-weight:300; color:var(--text-4); }
+.ri-badge { font-family:'JetBrains Mono',monospace; font-size:0.62rem; padding:3px 9px; border-radius:100px; flex-shrink:0; }
+.s-done { background:#f0fdf4; color:#16a34a; }
+.s-reading { background:var(--domain-bg,var(--off-white)); color:var(--domain-color,var(--text-4)); }
+.s-queue { background:var(--off-white); color:var(--text-4); }
+
+/* ACCORDION */
+.acc { display:flex; flex-direction:column; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; }
+.acc-item { background:var(--white); }
+.acc-trigger { width:100%; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; border:none; background:transparent; font-family:'Instrument Sans',sans-serif; font-size:0.88rem; font-weight:500; color:var(--text); text-align:left; transition:background 0.2s; gap:16px; }
+.acc-trigger:hover { background:var(--off-white); }
+.acc-chevron { flex-shrink:0; width:20px; height:20px; border-radius:50%; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:var(--text-3); transition:transform 0.3s var(--ease-out), background 0.2s; }
+.acc-item.open .acc-chevron { transform:rotate(180deg); background:var(--domain-color,var(--text)); border-color:transparent; color:white; }
+.acc-body { max-height:0; overflow:hidden; transition:max-height 0.5s var(--ease-out); padding:0 24px; }
+.acc-item.open .acc-body { max-height:400px; padding:0 24px 20px; }
+.acc-body p { font-size:0.84rem; font-weight:300; color:var(--text-3); line-height:1.72; border-top:1px solid var(--border); padding-top:16px; }
+
+/* ABOUT */
+#about { padding:100px 24px; background:var(--off-white); }
+.about-wrap { max-width:1100px; margin:0 auto; }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; }
+.about-prose p { font-size:0.97rem; font-weight:300; color:var(--text-2); line-height:1.85; margin-bottom:20px; }
+.about-prose p:last-child { margin-bottom:0; }
+.about-right { display:flex; flex-direction:column; gap:16px; }
+.about-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:24px; }
+.ac-label { font-family:'JetBrains Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-4); margin-bottom:14px; }
+.tag-wrap { display:flex; flex-wrap:wrap; gap:8px; }
+.int-tag { font-size:0.8rem; color:var(--text-2); background:var(--off-white); border:1px solid var(--border); padding:5px 13px; border-radius:100px; }
+.skill-row { display:flex; align-items:center; gap:14px; padding:8px 0; border-bottom:1px solid var(--border); }
+.skill-row:last-child { border-bottom:none; }
+.skill-name { font-size:0.84rem; font-weight:400; color:var(--text); flex:1; }
+.skill-bar { width:90px; height:3px; background:var(--border); border-radius:2px; overflow:hidden; flex-shrink:0; }
+.skill-fill { height:100%; border-radius:2px; background:var(--text); transition:width 1.5s var(--ease-out); }
+
+/* CV */
+#cv { padding:100px 24px; }
+.cv-wrap { max-width:1100px; margin:0 auto; }
+.cv-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:60px; margin-bottom:40px; }
+.cv-block { background:var(--off-white); border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.cv-cat { font-family:'JetBrains Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-4); margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.cv-e { padding:12px 0; border-bottom:1px solid var(--border); }
+.cv-e:last-child { border-bottom:none; padding-bottom:0; }
+.cv-e:first-child { padding-top:0; }
+.cv-et { font-size:0.9rem; font-weight:500; color:var(--text); margin-bottom:2px; }
+.cv-es { font-size:0.8rem; font-weight:300; color:var(--text-3); }
+.cv-ed { font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--text-4); margin-top:3px; }
+.cv-dl { background:var(--text); border-radius:var(--radius-lg); padding:40px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.cv-dl h3 { font-family:'Instrument Serif',serif; font-size:1.6rem; font-weight:400; color:var(--white); letter-spacing:-0.02em; margin-bottom:6px; }
+.cv-dl p { font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.45); }
+
+/* CONTACT */
+#contact { padding:100px 24px; background:var(--text); color:var(--white); }
+.contact-wrap { max-width:1100px; margin:0 auto; }
+.c-label { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:14px; }
+.c-headline { font-family:'Instrument Serif',serif; font-size:clamp(2.6rem,6vw,5.5rem); font-weight:400; letter-spacing:-0.035em; line-height:1.0; color:var(--white); margin-bottom:64px; max-width:700px; }
+.c-headline em { font-style:italic; color:rgba(255,255,255,0.35); }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; }
+.c-form { display:flex; flex-direction:column; gap:16px; }
+.c-field { display:flex; flex-direction:column; gap:7px; }
+.c-label-f { font-family:'JetBrains Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.3); }
+.c-input, .c-textarea { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:9px; padding:13px 16px; font-family:'Instrument Sans',sans-serif; font-size:0.9rem; font-weight:300; color:var(--white); outline:none; transition:border-color 0.2s, background 0.2s; }
+.c-input::placeholder, .c-textarea::placeholder { color:rgba(255,255,255,0.2); }
+.c-input:focus, .c-textarea:focus { border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.1); }
+.c-textarea { min-height:110px; resize:vertical; }
+.socials-list { display:flex; flex-direction:column; }
+.soc-link { display:flex; align-items:center; gap:16px; padding:18px 0; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.07); transition:opacity 0.2s; }
+.soc-link:last-child { border-bottom:none; }
+.soc-link:hover { opacity:0.6; }
+.soc-icon { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; font-size:0.95rem; flex-shrink:0; color:white; font-weight:600; font-family:'Instrument Serif',serif; }
+.soc-info { flex:1; }
+.soc-name { font-size:0.87rem; font-weight:500; color:var(--white); display:block; margin-bottom:2px; }
+.soc-handle { font-family:'JetBrains Mono',monospace; font-size:0.71rem; color:rgba(255,255,255,0.38); }
+.soc-arr { color:rgba(255,255,255,0.2); font-size:0.8rem; }
+
+/* FOOTER */
+footer { background:var(--text); border-top:1px solid rgba(255,255,255,0.06); padding:26px 28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+footer p { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(255,255,255,0.22); }
+.foot-links { display:flex; gap:24px; }
+.foot-links a { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(255,255,255,0.22); text-decoration:none; transition:color 0.2s; }
+.foot-links a:hover { color:rgba(255,255,255,0.6); }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.reveal.in { opacity:1; transform:translateY(0); }
+.rd1{transition-delay:0.08s} .rd2{transition-delay:0.18s} .rd3{transition-delay:0.28s} .rd4{transition-delay:0.38s}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .bento-card:nth-child(n){grid-column:span 12;}
+  .ds-head{grid-template-columns:1fr;gap:40px;}
+  .g3,.g2{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .contact-grid{grid-template-columns:1fr;gap:48px;}
+  .cv-grid{grid-template-columns:1fr;}
+}
+@media(max-width:700px){
+  .nav-links{display:none;}
+  .nav-ham{display:flex;}
+  .ds-stats{grid-template-columns:1fr 1fr;}
+  .cv-dl{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-wordmark">Abdullah Ishaq</a>
+  <ul class="nav-links">
+    <li><a href="#domains">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="cv/cv.html">CV</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <div class="nav-ham" onclick="toggleMenu()" id="ham">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#domains" onclick="closeMenu()">Work</a>
+  <a href="#ip" onclick="closeMenu()">Intellectual Property</a>
+  <a href="#dp" onclick="closeMenu()">Data Privacy</a>
+  <a href="#adr" onclick="closeMenu()">ADR</a>
+  <a href="#energy" onclick="closeMenu()">Energy Law</a>
+  <a href="#ai" onclick="closeMenu()">AI &amp; Web3</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="cv/cv.html" onclick="closeMenu()">CV</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-eyebrow">Law · Technology · Policy</div>
+    <h1 class="hero-name">Abdullah<br><em>Ishaq</em></h1>
+    <p class="hero-desc">Law student at Obafemi Awolowo University — researching intellectual property, data privacy, ADR, energy law, and the governance of AI and Web3.</p>
+    <div class="hero-actions">
+      <a href="#domains" class="btn btn-dark">Explore my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- DOMAIN BENTO -->
+<section id="domains">
+  <div class="domains-intro reveal">
+    <div class="sec-label">Five Domains</div>
+    <h2 class="sec-headline">Areas of <em>focus</em></h2>
+    <p class="sec-sub">Each domain is a living portfolio — essays, learning timelines, mini-projects, and regulatory updates.</p>
+  </div>
+  <div class="bento">
+    <a href="#ip" class="bento-card reveal rd1" data-domain="ip">
+      <div class="bento-icon">💡</div>
+      <div class="bento-body">
+        <div class="bento-tag">IP Law</div>
+        <div class="bento-title">Intellectual<br>Property</div>
+        <div class="bento-desc">Copyright, trademarks, patents, and regulating creative innovation in Africa's emerging IP ecosystem.</div>
+        <div class="bento-chips"><span class="bento-chip">Copyright</span><span class="bento-chip">Trademark</span><span class="bento-chip">WIPO</span><span class="bento-chip">Digital IP</span></div>
+      </div>
+      <div class="bento-arrow">→</div>
+    </a>
+    <a href="#dp" class="bento-card reveal rd2" data-domain="dp">
+      <div class="bento-icon">🔒</div>
+      <div class="bento-body">
+        <div class="bento-tag">Data Law</div>
+        <div class="bento-title">Data Privacy<br>&amp; Protection</div>
+        <div class="bento-desc">Nigeria's NDPA 2023 framework, comparative GDPR analysis, and surveillance capitalism in the Global South.</div>
+        <div class="bento-chips"><span class="bento-chip">NDPA 2023</span><span class="bento-chip">GDPR</span><span class="bento-chip">NDPC</span></div>
+      </div>
+      <div class="bento-arrow">→</div>
+    </a>
+    <a href="#adr" class="bento-card reveal rd2" data-domain="adr">
+      <div class="bento-icon">🤝</div>
+      <div class="bento-body">
+        <div class="bento-tag">Dispute Resolution</div>
+        <div class="bento-title">Alternative<br>Dispute Resolution</div>
+        <div class="bento-desc">Commercial arbitration, mediation, and negotiation — the Lagos Court of Arbitration and ICSID.</div>
+        <div class="bento-chips"><span class="bento-chip">Arbitration</span><span class="bento-chip">Mediation</span><span class="bento-chip">LCA</span></div>
+      </div>
+      <div class="bento-arrow">→</div>
+    </a>
+    <a href="#energy" class="bento-card reveal rd3" data-domain="energy">
+      <div class="bento-icon">⚡</div>
+      <div class="bento-body">
+        <div class="bento-tag">Energy</div>
+        <div class="bento-title">Energy Law<br>&amp; Regulation</div>
+        <div class="bento-desc">Nigeria's PIA 2021, NNPC Limited transition, NERC, the Electricity Act 2023, and the legal architecture of the energy transition.</div>
+        <div class="bento-chips"><span class="bento-chip">PIA 2021</span><span class="bento-chip">NERC</span><span class="bento-chip">Renewables</span></div>
+      </div>
+      <div class="bento-arrow">→</div>
+    </a>
+    <a href="#ai" class="bento-card reveal rd4" data-domain="ai">
+      <div class="bento-icon">🤖</div>
+      <div class="bento-body">
+        <div class="bento-tag">Tech Law</div>
+        <div class="bento-title">AI &amp; Web3<br>Law</div>
+        <div class="bento-desc">Governance of AI, blockchain, DeFi, NFTs, and DAOs — from Nigeria's SEC rules to the EU AI Act.</div>
+        <div class="bento-chips"><span class="bento-chip">EU AI Act</span><span class="bento-chip">Crypto</span><span class="bento-chip">Smart Contracts</span></div>
+      </div>
+      <div class="bento-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ── DOMAIN 1: IP ── -->
+<section id="ip" class="domain-section" style="--domain-color:var(--ip);--domain-bg:var(--ip-bg)">
+<div class="ds-wrap">
+  <div class="ds-head reveal">
+    <div>
+      <div class="ds-accent">Intellectual Property</div>
+      <h2 class="ds-title">Where creativity<br>meets <em>law</em></h2>
+      <p class="ds-intro">Exploring copyright, trademarks, patents, and the regulation of creative and technological innovation — with focus on Africa's IP ecosystem and protecting digital content in an AI-saturated world.</p>
+    </div>
+    <div class="ds-stats">
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Essays</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">2</span><span class="ds-stat-l">Projects</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">5</span><span class="ds-stat-l">Cases Studied</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">4</span><span class="ds-stat-l">Books</span></div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Essays &amp; Analysis</div><a href="#" class="ds-bh-link">All essays →</a></div>
+    <div class="g3">
+      <a href="articles/ip-ai-copyright.html" class="ec"><div class="ec-type">Essay · Copyright</div><div class="ec-title">AI-Generated Works and the Copyright Vacuum in Nigerian Law</div><div class="ec-exc">As generative AI floods the creative market, Nigerian copyright law remains silent on authorship by non-human entities. This essay interrogates Section 2 of the Copyright Act 2022 and what "authorship" means in an AI-assisted economy.</div><div class="ec-foot"><span>Jan 2025</span><span>8 min</span></div></a>
+      <a href="articles/ip-nollywood-trademark.html" class="ec"><div class="ec-type">Analysis · Trademark</div><div class="ec-title">Protecting Nollywood: Trademark Dilution in Nigeria's Film Industry</div><div class="ec-exc">Nollywood generates over $660M annually yet brand protection remains minimal. Examining how Nigerian trademark law intersects with entertainment and where the gaps lie for practitioners.</div><div class="ec-foot"><span>Nov 2024</span><span>6 min</span></div></a>
+      <a href="articles/ip-africa-patents.html" class="ec"><div class="ec-type">Opinion · Patent</div><div class="ec-title">Why Africa's Patent Problem is Really a Policy Problem</div><div class="ec-exc">African inventors file fewer than 1% of global patents. The root cause isn't creativity — it's structural: underfunded IP offices, high fees, institutional distrust. A reform agenda through ARIPO.</div><div class="ec-foot"><span>Sep 2024</span><span>5 min</span></div></a>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Learning Timeline</div></div>
+      <div class="tl-wrap">
+        <div class="tl-item"><div class="tl-date">2023 Year 1</div><div><div class="tl-t">Introduction to IP Law — Law 201</div><div class="tl-d">Core copyright, trademark, and patent principles under Nigerian law. Copyright Act Cap C28 LFN 2004 (now 2022).</div></div></div>
+        <div class="tl-item"><div class="tl-date">2023 Mid-year</div><div><div class="tl-t">WIPO Academy — DL-101 Certificate</div><div class="tl-d">International IP treaties — Paris Convention, Berne Convention, TRIPS Agreement.</div><div class="tl-badge">Certified</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024 Year 2</div><div><div class="tl-t">Research Paper: Digital Piracy in West Africa</div><div class="tl-d">10,000-word paper analysing enforcement gaps and proposing amendments to address streaming piracy.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2025 Ongoing</div><div><div class="tl-t">AI &amp; Copyright: Emerging Frameworks</div><div class="tl-d">Tracking EU AI Act, UK UKIPO consultations, and global debates on AI training data and copyright.</div><div class="tl-badge">Active</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Mini Projects</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="pc pc-tint" style="--domain-color:#7c3aed"><div class="pc-type">Dashboard · Case Law</div><div class="pc-title">Nigerian Copyright Case Tracker</div><div class="pc-desc">Curated database of landmark Nigerian IP cases 1970–2024 — summaries, holdings, and significance ratings by subject matter.</div><div class="pc-tags"><span class="pc-tag">Copyright</span><span class="pc-tag">Trademark</span><span class="pc-tag">Case Law</span></div></div>
+        <div class="pc pc-dark"><div class="pc-type">Comparative Analysis</div><div class="pc-title">IP Strength Index: Top 10 African Countries</div><div class="pc-desc">Matrix scoring 10 African jurisdictions on IP registration, enforcement, treaty membership, and judicial capacity.</div><div class="pc-tags"><span class="pc-tag">Comparative</span><span class="pc-tag">Africa</span><span class="pc-tag">Policy</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Latest Updates</div></div>
+      <div class="feed">
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">Nigeria's Copyright Act 2022 — Key Changes Analysed</div><div class="fi-d">The Copyright Act 2022 repealed Cap C28 LFN 2004 and introduced digital rights provisions for the first time.</div></div><div class="fi-date">Mar 2025</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">ARIPO Treaty Update: New Accessions 2024</div><div class="fi-d">Tracking new member states and amendments to the Harare Protocol on Patents and Industrial Designs.</div></div><div class="fi-date">Feb 2025</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">EU AI Act: Copyright Implications for Training Data</div><div class="fi-d">Article 53 introduces transparency obligations reshaping how AI companies document copyright compliance.</div></div><div class="fi-date">Jan 2025</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Reading List</div></div>
+      <div class="rl">
+        <div class="ri"><div class="ri-n">1</div><div class="ri-info"><div class="ri-t">Intellectual Property Law — Bently &amp; Sherman</div><div class="ri-s">Oxford · Core comparative textbook</div></div><div class="ri-badge s-reading">Reading</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-info"><div class="ri-t">IP Law in Nigeria — T.O. Elias (Ed.)</div><div class="ri-s">Nigerian Institute of Advanced Legal Studies</div></div><div class="ri-badge s-done">Done ✓</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-info"><div class="ri-t">The Future of the Internet — Jonathan Zittrain</div><div class="ri-s">How open innovation and IP tensions shape the digital environment</div></div><div class="ri-badge s-queue">Queue</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ── DOMAIN 2: DATA PRIVACY ── -->
+<section id="dp" class="domain-section" style="background:var(--surface);--domain-color:var(--dp);--domain-bg:var(--dp-bg)">
+<div class="ds-wrap">
+  <div class="ds-head reveal">
+    <div>
+      <div class="ds-accent">Data Privacy &amp; Protection</div>
+      <h2 class="ds-title">The law of<br><em>personal data</em></h2>
+      <p class="ds-intro">Analysing Nigeria's NDPR 2019 and NDPA 2023 framework, comparative GDPR study, data subject rights, regulatory compliance, and the legal challenges of surveillance capitalism in the Global South.</p>
+    </div>
+    <div class="ds-stats">
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Essays</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">2</span><span class="ds-stat-l">Projects</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Cases Studied</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">4</span><span class="ds-stat-l">Books</span></div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Essays &amp; Analysis</div></div>
+    <div class="g3">
+      <a href="articles/dp-ndpa-review.html" class="ec"><div class="ec-type">Analysis · NDPA</div><div class="ec-title">NDPA 2023: A Critical Review of Nigeria's New Data Protection Act</div><div class="ec-exc">Nigeria's NDPA 2023 is a significant upgrade from the NDPR 2019 — but does it go far enough? Evaluating enforcement mechanisms, controller obligations, and rights against GDPR benchmarks.</div><div class="ec-foot"><span>Feb 2025</span><span>9 min</span></div></a>
+      <a href="articles/dp-surveillance.html" class="ec"><div class="ec-type">Essay · Surveillance</div><div class="ec-title">The Legal Vacuum Around Government Surveillance in Nigeria</div><div class="ec-exc">From SIM registration to the Cybercrime Act's broad surveillance provisions — Nigeria's data protection law has a major blind spot when the data processor is the state.</div><div class="ec-foot"><span>Dec 2024</span><span>7 min</span></div></a>
+      <a href="articles/dp-gdpr-ndpa.html" class="ec"><div class="ec-type">Comparative · GDPR</div><div class="ec-title">GDPR vs NDPA: What Nigeria Can Still Learn from Europe's Data Law Journey</div><div class="ec-exc">Side-by-side examination of right to erasure, breach notification timelines, DPO requirements, and adequacy decisions — and what Nigeria could adopt.</div><div class="ec-foot"><span>Oct 2024</span><span>10 min</span></div></a>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Learning Timeline</div></div>
+      <div class="tl-wrap">
+        <div class="tl-item"><div class="tl-date">2023 Year 1</div><div><div class="tl-t">Constitutional Right to Privacy — S.37 CFRN 1999</div><div class="tl-d">Studied privacy as a constitutional right and its limitations under Nigerian law.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2023–2024</div><div><div class="tl-t">NDPR 2019 Full Text + GDPR Fundamentals Certificate</div><div class="tl-d">Annotated the full NDPR 2019 and NITDA guidance; completed FutureLearn's GDPR certificate.</div><div class="tl-badge">Certified</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">NDPA 2023 — Legislative Deep Study</div><div class="tl-d">Tracked transition from NITDA to NDPC and full implications of the new Act for Nigerian businesses.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div><div class="tl-t">Privacy Impact Assessment Simulation</div><div class="tl-d">Simulated PIA for a hypothetical Nigerian fintech startup under NDPA 2023 compliance requirements.</div><div class="tl-badge">Active</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Mini Projects</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="pc pc-tint" style="--domain-color:#0891b2"><div class="pc-type">Compliance Tool</div><div class="pc-title">Nigerian Data Compliance Checklist Generator</div><div class="pc-desc">Interactive checklist based on NDPA 2023 — 40+ compliance checkpoints helping SMEs understand controller/processor obligations.</div><div class="pc-tags"><span class="pc-tag">NDPA 2023</span><span class="pc-tag">Compliance</span><span class="pc-tag">SME</span></div></div>
+        <div class="pc pc-dark"><div class="pc-type">Comparison Dashboard</div><div class="pc-title">Africa Data Privacy Law Map — 12 Countries</div><div class="pc-desc">Comparative chart of data protection legislation across 12 African countries — enactment dates, enforcement bodies, cross-border transfer rules.</div><div class="pc-tags"><span class="pc-tag">Africa</span><span class="pc-tag">Comparative</span><span class="pc-tag">Regulatory</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Case Studies</div></div>
+    <div class="acc">
+      <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">Meta vs. NDPC (2024) — Africa's Biggest Data Fine<div class="acc-chevron">▾</div></button><div class="acc-body"><p>Nigeria's NDPC fined Meta $220 million for WhatsApp data privacy violations — one of Africa's largest data protection penalties. Examining the legal basis under NDPA 2023, Meta's defences, and the precedential value for multinational data controllers operating in Nigeria.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">Right to Erasure in Nigerian Law — A Gap Analysis<div class="acc-chevron">▾</div></button><div class="acc-body"><p>How the NDPA 2023 Section 34 right to erasure operates compared to GDPR Article 17. Are there sufficient judicial enforcement mechanisms? A gap analysis with recommendations for legislative strengthening.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">Cross-Border Data Transfers Post-NDPA<div class="acc-chevron">▾</div></button><div class="acc-body"><p>The NDPA 2023 restricts cross-border data transfers without adequate protection. Analysing what "adequate protection" means practically — using standard contractual clauses and examining how Nigerian fintech companies handle EU-origin customer data.</p></div></div>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Regulatory Updates</div></div>
+      <div class="feed">
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">NDPC Issues First Enforcement Notice</div><div class="fi-d">Nigeria Data Protection Commission issues enforcement notice against a major telecoms operator for invalid consent.</div></div><div class="fi-date">Jan 2025</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">EU–Nigeria Adequacy Decision: Still Pending</div><div class="fi-d">Tracking Nigeria's bid for EU adequacy status and what the NDPA 2023 must still demonstrate to qualify.</div></div><div class="fi-date">Dec 2024</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">AU Data Policy Framework Adopted</div><div class="fi-d">The African Union's Data Policy Framework 2022 sets a continental approach — analysing its interaction with Nigeria's NDPA.</div></div><div class="fi-date">Nov 2024</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Reading List</div></div>
+      <div class="rl">
+        <div class="ri"><div class="ri-n">1</div><div class="ri-info"><div class="ri-t">NDPA 2023 — Full Legislative Text + NDPC Regulations</div><div class="ri-s">Primary source · Annotated with personal commentary</div></div><div class="ri-badge s-done">Done ✓</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-info"><div class="ri-t">Privacy and Freedom — Alan Westin</div><div class="ri-s">Foundational philosophy of privacy as social control</div></div><div class="ri-badge s-reading">Reading</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-info"><div class="ri-t">The Age of Surveillance Capitalism — Shoshana Zuboff</div><div class="ri-s">Landmark critique of platform data exploitation</div></div><div class="ri-badge s-queue">Queue</div></div>
+        <div class="ri"><div class="ri-n">4</div><div class="ri-info"><div class="ri-t">Data Protection Law in Africa — G. Greenleaf (Ed.)</div><div class="ri-s">Comparative regional study across African jurisdictions</div></div><div class="ri-badge s-queue">Queue</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ── DOMAIN 3: ADR ── -->
+<section id="adr" class="domain-section" style="--domain-color:var(--adr);--domain-bg:var(--adr-bg)">
+<div class="ds-wrap">
+  <div class="ds-head reveal">
+    <div>
+      <div class="ds-accent">Alternative Dispute Resolution</div>
+      <h2 class="ds-title">Resolving disputes<br><em>beyond the courtroom</em></h2>
+      <p class="ds-intro">Studying arbitration, mediation, negotiation, and conciliation frameworks — with particular interest in commercial arbitration in Nigeria, ICSID investor-state disputes, and the Lagos Court of Arbitration's emerging regional role.</p>
+    </div>
+    <div class="ds-stats">
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Essays</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">2</span><span class="ds-stat-l">Simulations</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Cases Studied</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Books</span></div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Essays &amp; Analysis</div></div>
+    <div class="g3">
+      <a href="articles/adr-lca.html" class="ec"><div class="ec-type">Analysis · Arbitration</div><div class="ec-title">The Lagos Court of Arbitration: Africa's Answer to London and Paris?</div><div class="ec-exc">Since its establishment, the LCA has handled 300+ cases positioning Lagos as a commercial arbitration hub. Evaluating its institutional competence and enforceability record against LCIA and ICC benchmarks.</div><div class="ec-foot"><span>Feb 2025</span><span>7 min</span></div></a>
+      <a href="articles/adr-odr.html" class="ec"><div class="ec-type">Essay · ODR</div><div class="ec-title">ODR in Nigeria: Can Technology Replace the Courtroom for Small Claims?</div><div class="ec-exc">With court backlogs exceeding 5 years in some states, online dispute resolution offers a promising alternative. Reviewing the legal framework, available platforms, and enforcement challenges.</div><div class="ec-foot"><span>Dec 2024</span><span>6 min</span></div></a>
+      <a href="articles/adr-pid.html" class="ec"><div class="ec-type">Comparative · ICSID</div><div class="ec-title">Nigeria and Investment Treaty Arbitration: Lessons from P&amp;ID v. Nigeria</div><div class="ec-exc">The $10 billion P&amp;ID arbitration award shook Nigerian legal circles. Examining what went wrong, the lessons for government contract drafting, and Nigeria's evolving ISDS policy.</div><div class="ec-foot"><span>Oct 2024</span><span>9 min</span></div></a>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Learning Timeline</div></div>
+      <div class="tl-wrap">
+        <div class="tl-item"><div class="tl-date">2023 Year 1</div><div><div class="tl-t">ADR Course — Law 301</div><div class="tl-d">Foundational study of mediation, conciliation, negotiation, and arbitration under the Arbitration and Conciliation Act 2004.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">ACA 2023 — New Legislation Deep Study</div><div class="tl-d">Nigeria enacted ACA 2023, repealing the old Act — emergency arbitrator provisions, revised timelines, court intervention limits.</div><div class="tl-badge">Legislative Update</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">ICSID Rules Masterclass — Online</div><div class="tl-d">2022 revised ICSID Arbitration Rules and implications for African states as respondents in investor-state arbitration.</div><div class="tl-badge">Certified</div></div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div><div class="tl-t">Advocacy Practice — Ongoing</div><div class="tl-d">Building oral advocacy and brief-writing skills through faculty simulations and practice exercises.</div><div class="tl-badge">Active</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Mini Projects</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="pc pc-tint" style="--domain-color:#059669"><div class="pc-type">Comparison Dashboard</div><div class="pc-title">Nigeria ADR Institution Comparison Tool</div><div class="pc-desc">Comparative analysis of LCA, NCIA, and ICMC — fee structures, timelines, panel qualifications, and satisfaction data.</div><div class="pc-tags"><span class="pc-tag">LCA</span><span class="pc-tag">NCIA</span><span class="pc-tag">Commercial</span></div></div>
+        <div class="pc pc-dark"><div class="pc-type">Advocacy Simulation</div><div class="pc-title">Sample Arbitration Memorial — Oil &amp; Gas Dispute</div><div class="pc-desc">A claimant's memorial drafted for an oil &amp; gas contract dispute under LCIA rules — demonstrating procedural and substantive argumentation skills.</div><div class="pc-tags"><span class="pc-tag">Moot</span><span class="pc-tag">LCIA</span><span class="pc-tag">O&amp;G</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Updates</div></div>
+      <div class="feed">
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">ACA 2023: Emergency Arbitrator Provisions Analysed</div><div class="fi-d">Nigeria's new ACA 2023 introduces emergency arbitrator provisions for urgent interim relief — notes on commercial implications.</div></div><div class="fi-date">Feb 2025</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">ECOWAS Court ADR Pilot Programme Launched</div><div class="fi-d">ECOWAS introduces mediation pilot for regional trade disputes — reviewing its impact on West African commerce.</div></div><div class="fi-date">Jan 2025</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Reading List</div></div>
+      <div class="rl">
+        <div class="ri"><div class="ri-n">1</div><div class="ri-info"><div class="ri-t">Redfern &amp; Hunter on International Arbitration</div><div class="ri-s">Oxford · The definitive international arbitration textbook</div></div><div class="ri-badge s-reading">Reading</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-info"><div class="ri-t">Arbitration in Nigeria — Fabian Ajogwu SAN</div><div class="ri-s">Centre for Commercial Law Development · Nigerian practice guide</div></div><div class="ri-badge s-done">Done ✓</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-info"><div class="ri-t">Getting to Yes — Fisher &amp; Ury</div><div class="ri-s">Harvard Negotiation Project · Principled negotiation framework</div></div><div class="ri-badge s-done">Done ✓</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ── DOMAIN 4: ENERGY ── -->
+<section id="energy" class="domain-section" style="background:var(--surface);--domain-color:var(--en);--domain-bg:var(--en-bg)">
+<div class="ds-wrap">
+  <div class="ds-head reveal">
+    <div>
+      <div class="ds-accent">Energy Law &amp; Regulation</div>
+      <h2 class="ds-title">Powering Africa,<br><em>legally</em></h2>
+      <p class="ds-intro">Studying Nigeria's petroleum and electricity regulatory framework — the PIA 2021, NERC, the transition from NNPC to NNPC Ltd — and the growing legal architecture around renewable energy, energy transition, and climate compliance.</p>
+    </div>
+    <div class="ds-stats">
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Essays</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">2</span><span class="ds-stat-l">Projects</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Updates</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Books</span></div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Essays &amp; Policy Analysis</div></div>
+    <div class="g3">
+      <a href="articles/energy-pia.html" class="ec"><div class="ec-type">Policy · PIA 2021</div><div class="ec-title">The Petroleum Industry Act 2021: Three Years On — What Changed?</div><div class="ec-exc">Nigeria's landmark PIA 2021 restructured the entire petroleum sector — abolishing NNPC, creating NNPC Limited, establishing NUPRC. Assessing implementation progress and outstanding challenges.</div><div class="ec-foot"><span>Jan 2025</span><span>10 min</span></div></a>
+      <a href="articles/energy-transition.html" class="ec"><div class="ec-type">Essay · Energy Transition</div><div class="ec-title">Nigeria's Energy Transition Plan: A Legal Analysis of the Regulatory Gaps</div><div class="ec-exc">Nigeria's 2022 ETP sets ambitious decarbonization targets — but does the legal framework support them? Examining NERC's mandate, the Electricity Act 2023, and international climate obligations.</div><div class="ec-foot"><span>Nov 2024</span><span>8 min</span></div></a>
+      <a href="articles/energy-solar.html" class="ec"><div class="ec-type">Comparative · Renewable</div><div class="ec-title">Solar and Wind Licensing: How NERC's Framework Compares to Kenya and South Africa</div><div class="ec-exc">As renewable energy investment accelerates in Africa, licensing frameworks matter enormously. This comparative study highlights Nigeria's regulatory bottlenecks and what peer countries have done better.</div><div class="ec-foot"><span>Sep 2024</span><span>7 min</span></div></a>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Learning Timeline</div></div>
+      <div class="tl-wrap">
+        <div class="tl-item"><div class="tl-date">2023 Year 1</div><div><div class="tl-t">Natural Resources Law Module</div><div class="tl-d">Introduction to petroleum law and the pre-PIA regulatory architecture under DPR/NNPC.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2023–2024</div><div><div class="tl-t">PIA 2021 — Full Text Analysis (319 pages)</div><div class="tl-d">Detailed annotations on governance, fiscal, and midstream/downstream provisions of the Petroleum Industry Act.</div><div class="tl-badge">Self-Study</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">Electricity Act 2023 — Legislative Tracking</div><div class="tl-d">Tracked Nigeria's new Electricity Act 2023 — amendments to EPSRA and decentralization of electricity regulation to states.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div><div class="tl-t">Climate Law Research: NDCs &amp; Paris Agreement</div><div class="tl-d">Analysing Nigeria's NDC commitments and the gap between legislative frameworks and actual emissions targets.</div><div class="tl-badge">Active</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Mini Projects</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="pc pc-tint" style="--domain-color:#d97706"><div class="pc-type">Regulatory Tracker</div><div class="pc-title">PIA 2021 Implementation Scorecard</div><div class="pc-desc">Scorecard tracking PIA 2021 key provisions — NNPC Ltd transition, NUPRC establishment, host community fund, fiscal terms. Updated quarterly.</div><div class="pc-tags"><span class="pc-tag">PIA 2021</span><span class="pc-tag">NNPC Ltd</span><span class="pc-tag">NUPRC</span></div></div>
+        <div class="pc pc-dark"><div class="pc-type">Policy Brief</div><div class="pc-title">Solar Regulatory Reform: Nigeria's Mini-Grid Framework</div><div class="pc-desc">3,000-word policy brief recommending amendments to NERC's mini-grid regulations to accelerate solar deployment in rural Nigeria.</div><div class="pc-tags"><span class="pc-tag">Solar</span><span class="pc-tag">Rural</span><span class="pc-tag">NERC</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Regulatory Updates</div></div>
+      <div class="feed">
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">NNPC Ltd's First Annual Report — Key Findings</div><div class="fi-d">NNPC Limited published its inaugural annual report as a commercial entity. Analysing governance disclosures and financial transparency.</div></div><div class="fi-date">Mar 2025</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">Nigeria's COP29 Climate Commitments — Legal Review</div><div class="fi-d">Nigeria updated its NDCs at COP29. Legal implications for domestic energy regulation and NERC rules.</div></div><div class="fi-date">Dec 2024</div></div>
+        <div class="fi"><div class="fi-dot"></div><div class="fi-body"><div class="fi-t">State Electricity Markets: Lagos &amp; Imo Begin Licensing</div><div class="fi-d">Following the Electricity Act 2023, states begin issuing independent distribution licenses. Regulatory fragmentation risk analysis.</div></div><div class="fi-date">Nov 2024</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Reading List</div></div>
+      <div class="rl">
+        <div class="ri"><div class="ri-n">1</div><div class="ri-info"><div class="ri-t">Petroleum Industry Act 2021 — Annotated</div><div class="ri-s">Primary legislation · Personal annotated copy</div></div><div class="ri-badge s-done">Done ✓</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-info"><div class="ri-t">Energy Law in Nigeria — Emeka Duruigbo</div><div class="ri-s">Comprehensive analysis of Nigerian petroleum and electricity law</div></div><div class="ri-badge s-reading">Reading</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-info"><div class="ri-t">Fossil Capital — Andreas Malm</div><div class="ri-s">Historical materialism of fossil fuel dependency — transition context</div></div><div class="ri-badge s-queue">Queue</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ── DOMAIN 5: AI & WEB3 ── -->
+<section id="ai" class="domain-section" style="--domain-color:var(--ai);--domain-bg:var(--ai-bg)">
+<div class="ds-wrap">
+  <div class="ds-head reveal">
+    <div>
+      <div class="ds-accent">AI &amp; Web3 Law</div>
+      <h2 class="ds-title">Law at the<br><em>technological frontier</em></h2>
+      <p class="ds-intro">Interrogating the governance of artificial intelligence, blockchain, DeFi, NFTs, and DAOs — from Nigeria's SEC Digital Assets Rules and evolving CBN crypto policy to the EU AI Act and Africa's positioning in global AI governance debates.</p>
+    </div>
+    <div class="ds-stats">
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Essays</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">2</span><span class="ds-stat-l">Projects</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">3</span><span class="ds-stat-l">Case Studies</span></div>
+      <div class="ds-stat"><span class="ds-stat-n">5</span><span class="ds-stat-l">Milestones</span></div>
+    </div>
+  </div>
+  <div class="ds-block reveal">
+    <div class="ds-bh"><div class="ds-bh-title">Essays &amp; Analysis</div></div>
+    <div class="g3">
+      <a href="articles/ai-africa-governance.html" class="ec"><div class="ec-type">Analysis · AI Governance</div><div class="ec-title">Africa's Absence from Global AI Governance: Why the Continent Must Speak Now</div><div class="ec-exc">The EU AI Act, US Executive Order on AI, and China's generative AI regulations have been crafted largely without African voices. Arguing for an African AI governance framework rooted in ubuntu ethics and continental economic goals.</div><div class="ec-foot"><span>Feb 2025</span><span>8 min</span></div></a>
+      <a href="articles/ai-daos.html" class="ec"><div class="ec-type">Essay · Web3</div><div class="ec-title">DAOs as Legal Entities: Can Nigeria Recognize a Decentralized Autonomous Organization?</div><div class="ec-exc">Wyoming granted DAOs legal personality in 2021. Can Nigerian company law accommodate DAOs under CAMA 2020? Exploring the conceptual and doctrinal challenges with concrete reform proposals.</div><div class="ec-foot"><span>Dec 2024</span><span>7 min</span></div></a>
+      <a href="articles/ai-cbn-crypto.html" class="ec"><div class="ec-type">Comparative · Crypto</div><div class="ec-title">CBN's Crypto U-Turn: From Ban to Regulation — Nigeria's Digital Asset Journey</div><div class="ec-exc">From the 2021 CBN ban to the SEC's 2023 Digital Assets Rules — Nigeria's crypto regulatory pendulum. Charting the legal journey, constitutionality of the ban, and assessing the new framework.</div><div class="ec-foot"><span>Oct 2024</span><span>9 min</span></div></a>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Learning Timeline</div></div>
+      <div class="tl-wrap">
+        <div class="tl-item"><div class="tl-date">2023 Year 1</div><div><div class="tl-t">Blockchain and Contract Law</div><div class="tl-d">Exploring whether smart contracts satisfy requirements of a valid contract under Nigerian law — offer, acceptance, consideration, intention.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2023–2024</div><div><div class="tl-t">SEC Digital Assets Rules 2022 — Deep Study</div><div class="tl-d">Nigeria's SEC Digital Assets Rules — full text review and comparative analysis with ESMA crypto guidelines.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">EU AI Act — Legislative Tracking (Draft to Adoption)</div><div class="tl-d">Followed the EU AI Act from draft to adoption, focusing on prohibited AI practices, high-risk systems, and governance architecture.</div><div class="tl-badge">In Force</div></div></div>
+        <div class="tl-item"><div class="tl-date">2024</div><div><div class="tl-t">AI Liability Frameworks Research</div><div class="tl-d">Does Nigeria's Torts law apply to AI-caused harm? Comparing the EU AI Liability Directive with Nigerian negligence doctrine.</div></div></div>
+        <div class="tl-item"><div class="tl-date">2025</div><div><div class="tl-t">NITDA AI Policy — Public Consultation Response</div><div class="tl-d">Submitted a student response to Nigeria's NITDA AI Policy public consultation — covering regulatory sandboxes and AI accountability.</div><div class="tl-badge">Active</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Mini Projects</div></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="pc pc-tint" style="--domain-color:#2563eb"><div class="pc-type">Comparative Dashboard</div><div class="pc-title">Global AI Regulation Matrix — 12 Jurisdictions</div><div class="pc-desc">EU AI Act, US Executive Order, China Generative AI Rules, UK AI White Paper and 8 more — scored on risk-based approach, enforcement, and rights protections.</div><div class="pc-tags"><span class="pc-tag">EU AI Act</span><span class="pc-tag">Comparative</span><span class="pc-tag">12 Countries</span></div></div>
+        <div class="pc pc-dark"><div class="pc-type">Research Note</div><div class="pc-title">Smart Contracts under Nigerian Contract Law: A Legal Stress Test</div><div class="pc-desc">Applied the five elements of Nigerian contract formation to five DeFi smart contract scenarios — analysing validity, enforceability, and what happens when the code has a bug.</div><div class="pc-tags"><span class="pc-tag">Smart Contracts</span><span class="pc-tag">DeFi</span><span class="pc-tag">Contract Law</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 ds-block reveal">
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Case Studies</div></div>
+      <div class="acc">
+        <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">SEC v. Ripple Labs — Nigeria's Lesson<div class="acc-chevron">▾</div></button><div class="acc-body"><p>The Ripple case's "programmatic sales" distinction has global implications. For Nigeria's SEC, it raises questions about how the Digital Assets Rules classify XRP-like tokens — and what classification disputes Nigerian token issuers might face.</p></div></div>
+        <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">AI Liability: Who Pays When AI Causes Harm?<div class="acc-chevron">▾</div></button><div class="acc-body"><p>Using Nigeria's general tort principles — negligence, product liability under the Consumer Protection Act — this case study constructs a liability framework for AI-caused harm in the absence of dedicated Nigerian legislation, compared with the EU AI Liability Directive.</p></div></div>
+        <div class="acc-item"><button class="acc-trigger" onclick="tog(this)">Binance vs. Nigeria: Jurisdiction, Liability &amp; Crypto Platforms<div class="acc-chevron">▾</div></button><div class="acc-body"><p>Nigeria's detention of Binance executive Tigran Gambaryan raised complex questions about jurisdiction, extradition, corporate criminal liability, and the regulatory obligations of crypto exchanges operating in Nigeria without a formal license.</p></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ds-bh"><div class="ds-bh-title">Reading List</div></div>
+      <div class="rl">
+        <div class="ri"><div class="ri-n">1</div><div class="ri-info"><div class="ri-t">The Alignment Problem — Brian Christian</div><div class="ri-s">AI safety and ethics context for legal scholars</div></div><div class="ri-badge s-reading">Reading</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-info"><div class="ri-t">Cryptoassets — Burniske &amp; Tatar</div><div class="ri-s">Technical foundation for understanding blockchain before regulating it</div></div><div class="ri-badge s-done">Done ✓</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-info"><div class="ri-t">The Code of Capital — Katharina Pistor</div><div class="ri-s">How law creates and maintains capital — essential Web3 context</div></div><div class="ri-badge s-queue">Queue</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="reveal">
+      <div class="sec-label">About</div>
+      <h2 class="sec-headline">A legal mind<br><em>in formation</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-prose reveal">
+        <p>I am a law student at Obafemi Awolowo University, Ile-Ife — one of Nigeria's foremost institutions, where I enrolled in 2023. My legal education has given me a strong foundation in doctrinal law, while my independent research has taken me into the most dynamic and consequential fields of 21st-century legal practice.</p>
+        <p>My interests converge at a single point: law at the intersection of technology, globalization, and regulatory change. I believe the next generation of lawyers must be fluent not just in statutes and case law, but in policy analysis, emerging technology frameworks, and cross-border legal thinking.</p>
+        <p>I have had the privilege of interning at Clifford Chance and Mastercard — experiences that deepened my understanding of global legal practice, financial services regulation, and how elite institutions approach complex cross-border mandates.</p>
+        <p>This portfolio is a living document. It is the essays I write to synthesize complex ideas, the mini-projects I build to stress-test theory, and the timelines that show how my thinking evolves. Honest about what is still in progress.</p>
+      </div>
+      <div class="about-right reveal rd2">
+        <div class="about-card">
+          <div class="ac-label">Education</div>
+          <div style="font-size:0.95rem;font-weight:500;color:var(--text);margin-bottom:4px">Obafemi Awolowo University, Ile-Ife</div>
+          <div style="font-size:0.84rem;font-weight:300;color:var(--text-3)">LL.B (Hons) — Faculty of Law &nbsp;·&nbsp; 2023–Present</div>
+        </div>
+        <div class="about-card">
+          <div class="ac-label">Legal Interests</div>
+          <div class="tag-wrap">
+            <span class="int-tag">Intellectual Property</span>
+            <span class="int-tag">Data Privacy</span>
+            <span class="int-tag">ADR &amp; Arbitration</span>
+            <span class="int-tag">Energy Law</span>
+            <span class="int-tag">AI Governance</span>
+            <span class="int-tag">Web3 &amp; Crypto</span>
+            <span class="int-tag">Policy Analysis</span>
+            <span class="int-tag">Comparative Law</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="ac-label">Competencies</div>
+          <div class="skill-row"><span class="skill-name">Legal Research &amp; Writing</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Policy Analysis</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">RegTech / LegalTech Literacy</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Negotiation &amp; Advocacy</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CV -->
+<section id="cv">
+  <div class="cv-wrap">
+    <div class="reveal">
+      <div class="sec-label">Curriculum Vitae</div>
+      <h2 class="sec-headline">Academic &amp;<br><em>professional record</em></h2>
+    </div>
+    <div class="cv-grid">
+      <div class="cv-block reveal rd1">
+        <div class="cv-cat">Education</div>
+        <div class="cv-e">
+          <div class="cv-et">Obafemi Awolowo University, Ile-Ife</div>
+          <div class="cv-es">LL.B (Hons) — Faculty of Law</div>
+          <div class="cv-ed">2023 – Present</div>
+        </div>
+      </div>
+      <div class="cv-block reveal rd2">
+        <div class="cv-cat">Legal Internships</div>
+        <div class="cv-e">
+          <div class="cv-et">Clifford Chance</div>
+          <div class="cv-es">Legal Intern</div>
+          <div class="cv-ed">[Month Year] – [Month Year]</div>
+        </div>
+        <div class="cv-e">
+          <div class="cv-et">Mastercard</div>
+          <div class="cv-es">Legal Intern</div>
+          <div class="cv-ed">[Month Year] – [Month Year]</div>
+        </div>
+      </div>
+      <div class="cv-block reveal rd1">
+        <div class="cv-cat">Certifications &amp; Courses</div>
+        <div class="cv-e">
+          <div class="cv-et">WIPO Academy — DL-101: IP Fundamentals</div>
+          <div class="cv-es">World Intellectual Property Organization</div>
+          <div class="cv-ed">2023</div>
+        </div>
+        <div class="cv-e">
+          <div class="cv-et">GDPR Fundamentals — FutureLearn</div>
+          <div class="cv-es">Data Protection &amp; Privacy Law</div>
+          <div class="cv-ed">2023</div>
+        </div>
+        <div class="cv-e">
+          <div class="cv-et">ICSID Arbitration Rules Masterclass</div>
+          <div class="cv-es">Investor-State Dispute Settlement</div>
+          <div class="cv-ed">2024</div>
+        </div>
+      </div>
+      <div class="cv-block reveal rd2">
+        <div class="cv-cat">Activities &amp; Contributions</div>
+        <div class="cv-e">
+          <div class="cv-et">OAU Law Students' Society</div>
+          <div class="cv-es">Active Member · [Role if applicable]</div>
+          <div class="cv-ed">2023 – Present</div>
+        </div>
+        <div class="cv-e">
+          <div class="cv-et">Moot &amp; Advocacy Simulations</div>
+          <div class="cv-es">Faculty arbitration, negotiation and client counselling exercises</div>
+          <div class="cv-ed">2024 – Present</div>
+        </div>
+        <div class="cv-e">
+          <div class="cv-et">Substack — Reflections &amp; Rants</div>
+          <div class="cv-es">Legal commentary and opinion writing</div>
+          <div class="cv-ed">Ongoing</div>
+        </div>
+      </div>
+      <div class="cv-block reveal" style="grid-column:1/-1">
+        <div class="cv-cat">Research &amp; Publications</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+          <div class="cv-e"><div class="cv-et">AI-Generated Works and Nigerian Copyright Law</div><div class="cv-es">Essay · Portfolio Publication</div><div class="cv-ed">Jan 2025</div></div>
+          <div class="cv-e"><div class="cv-et">NDPA 2023: A Critical Review</div><div class="cv-es">Essay · Portfolio Publication</div><div class="cv-ed">Feb 2025</div></div>
+          <div class="cv-e"><div class="cv-et">Africa's Absence from Global AI Governance</div><div class="cv-es">Essay · Portfolio Publication</div><div class="cv-ed">Feb 2025</div></div>
+          <div class="cv-e"><div class="cv-et">PIA 2021: Three Years On</div><div class="cv-es">Policy Analysis · Portfolio Publication</div><div class="cv-ed">Jan 2025</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cv-dl reveal">
+      <div>
+        <h3>Download Full CV</h3>
+        <p>Complete academic and professional record — updated 2025</p>
+      </div>
+      <a href="cv/cv.html" class="btn btn-light">Download PDF ↓</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="c-label reveal">Contact</div>
+    <h2 class="c-headline reveal">Let's build<br>something <em>together</em></h2>
+    <div class="contact-grid">
+      <form class="c-form reveal" onsubmit="handleSend(event)">
+        <div class="c-field"><label class="c-label-f">Name</label><input class="c-input" type="text" placeholder="Your full name" required></div>
+        <div class="c-field"><label class="c-label-f">Email</label><input class="c-input" type="email" placeholder="your@email.com" required></div>
+        <div class="c-field"><label class="c-label-f">Subject</label><input class="c-input" type="text" placeholder="What's this about?"></div>
+        <div class="c-field"><label class="c-label-f">Message</label><textarea class="c-textarea" placeholder="Tell me more..."></textarea></div>
+        <button type="submit" class="btn btn-light" id="sendBtn" style="align-self:flex-start">Send message →</button>
+      </form>
+      <div class="socials-list reveal rd2">
+        <a href="https://www.linkedin.com/in/abdullahishaq01" target="_blank" class="soc-link">
+          <div class="soc-icon">in</div>
+          <div class="soc-info"><span class="soc-name">LinkedIn</span><span class="soc-handle">linkedin.com/in/abdullahishaq01</span></div>
+          <div class="soc-arr">↗</div>
+        </a>
+        <a href="https://twitter.com/the_habibi1" target="_blank" class="soc-link">
+          <div class="soc-icon" style="font-size:0.82rem">𝕏</div>
+          <div class="soc-info"><span class="soc-name">X / Twitter</span><span class="soc-handle">@the_habibi1</span></div>
+          <div class="soc-arr">↗</div>
+        </a>
+        <a href="https://github.com/unusualhabibi" target="_blank" class="soc-link">
+          <div class="soc-icon" style="font-size:0.85rem;font-family:monospace">GH</div>
+          <div class="soc-info"><span class="soc-name">GitHub</span><span class="soc-handle">unusualhabibi</span></div>
+          <div class="soc-arr">↗</div>
+        </a>
+        <a href="https://reflectionsandrants.substack.com" target="_blank" class="soc-link">
+          <div class="soc-icon" style="font-size:0.85rem;font-weight:700">S</div>
+          <div class="soc-info"><span class="soc-name">Substack</span><span class="soc-handle">reflectionsandrants.substack.com</span></div>
+          <div class="soc-arr">↗</div>
+        </a>
+        <a href="https://instagram.com/lawwithabdullah" target="_blank" class="soc-link">
+          <div class="soc-icon" style="font-size:1rem">◎</div>
+          <div class="soc-info"><span class="soc-name">Instagram</span><span class="soc-handle">@lawwithabdullah</span></div>
+          <div class="soc-arr">↗</div>
+        </a>
+        <div class="soc-link" style="pointer-events:none;opacity:0.4">
+          <div class="soc-icon" style="font-size:0.8rem">📍</div>
+          <div class="soc-info"><span class="soc-name">Location</span><span class="soc-handle">Ile-Ife, Osun State, Nigeria</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Abdullah Ishaq · Obafemi Awolowo University · Ile-Ife, Nigeria</p>
+  <div class="foot-links">
+    <a href="#hero">Top</a>
+    <a href="#domains">Work</a>
+    <a href="#about">About</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('ham').querySelectorAll('span');
+  m.classList.toggle('open');
+  const o = m.classList.contains('open');
+  h[0].style.transform = o ? 'rotate(45deg) translate(5px,6px)' : '';
+  h[1].style.opacity = o ? '0' : '';
+  h[2].style.transform = o ? 'rotate(-45deg) translate(5px,-6px)' : '';
+}
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// Accordion
+function tog(btn) {
+  const item = btn.closest('.acc-item');
+  const parent = btn.closest('.acc');
+  const wasOpen = item.classList.contains('open');
+  parent.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.07, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.background =
+    window.scrollY > 10 ? 'rgba(255,255,255,0.93)' : 'rgba(255,255,255,0.85)';
+});
+
+// Bento card 3D tilt
+document.querySelectorAll('.bento-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `translateY(-5px) scale(1.006) rotateY(${x*3.5}deg) rotateX(${-y*3.5}deg)`;
+    card.style.transition = 'transform 0.08s ease, box-shadow 0.4s, border-color 0.3s';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s, border-color 0.3s';
+  });
+});
+
+// Contact form
+function handleSend(e) {
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.textContent = 'Sent ✓';
+  btn.style.background = '#f0fdf4';
+  btn.style.color = '#16a34a';
+  setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+}
+</script>
+</body>
+</html>
